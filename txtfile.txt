@@ -1,0 +1,6 @@
+FirstName: Mary LastName: Pack Course: 1 GPA: 3.55
+FirstName: Jack LastName: Sparrow Course: 1 GPA: 3.75
+FirstName: Nikky LastName: Sanders Course: 2 GPA: 4.0
+FirstName: Naomi LastName: Harrison Course: 2 GPA: 4.22
+FirstName: Peter LastName: Ras Course: 3 GPA: 4.75
+

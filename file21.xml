@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:studentList xmlns:ns2="com.sandeveloper.code">
+    <student>
+        <firstName>Mary</firstName>
+        <lastName>Pack</lastName>
+        <courseNumber>1</courseNumber>
+        <avGrade>3.55</avGrade>
+    </student>
+    <student>
+        <firstName>Jack</firstName>
+        <lastName>Sparrow</lastName>
+        <courseNumber>1</courseNumber>
+        <avGrade>3.75</avGrade>
+    </student>
+    <student>
+        <firstName>Nikky</firstName>
+        <lastName>Sanders</lastName>
+        <courseNumber>2</courseNumber>
+        <avGrade>4.0</avGrade>
+    </student>
+    <student>
+        <firstName>Naomi</firstName>
+        <lastName>Harrison</lastName>
+        <courseNumber>2</courseNumber>
+        <avGrade>4.22</avGrade>
+    </student>
+    <student>
+        <firstName>Peter</firstName>
+        <lastName>Ras</lastName>
+        <courseNumber>3</courseNumber>
+        <avGrade>4.75</avGrade>
+    </student>
+</ns2:studentList>
