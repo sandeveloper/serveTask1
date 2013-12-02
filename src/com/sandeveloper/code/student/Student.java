@@ -5,15 +5,29 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.sandeveloper.code.main.Department;
+
+
 @XmlRootElement(name = "student")
-@XmlType(propOrder = { "firstName", "lastName", "courseNumber", "avGrade" })
+@XmlType(propOrder = {"id", "firstName", "lastName", "courseId", "avGrade" })
 public class Student implements Serializable {
 
+	private int id;
 	private String firstName;
 	private String lastName;
-	private int course;
+	private int courseId;
 	private double avGrade;
+	
+	Department dept;
+	
+	public Student() {
+		dept = new Department();
+	}
 
+	public void setId(int id){
+		this.id = id;
+	}
+	
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
@@ -22,12 +36,16 @@ public class Student implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public void setCourseNumber(int course) {
-		this.course = course;
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
 	}
 
 	public void setAvGrade(double avGrade) {
 		this.avGrade = avGrade;
+	}
+	
+	public int getId() {
+		return id;
 	}
 
 	public String getFirstName() {
@@ -38,8 +56,8 @@ public class Student implements Serializable {
 		return lastName;
 	}
 
-	public int getCourseNumber() {
-		return course;
+	public int getCourseId() {
+		return courseId;
 	}
 
 	public double getAvGrade() {
@@ -48,8 +66,8 @@ public class Student implements Serializable {
 
 	public String toString() {
 
-		return "FirstName: " + getFirstName() + " LastName: " + getLastName()
-				+ " Course: " + getCourseNumber() + " GPA: " + getAvGrade();
+		return "id " + id + " FirstName: " + getFirstName() + " LastName: " + getLastName()
+				+ " Course: " + getCourseId() + " GPA: " + getAvGrade();
 
 	}
 
@@ -70,6 +88,4 @@ public class Student implements Serializable {
 				&& this.getLastName().equals(student.getLastName());
 	}
 
-	public void emptyMethod() {
-	}
 }

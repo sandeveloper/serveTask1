@@ -1,50 +1,52 @@
 package com.sandeveloper.code.main;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.xml.bind.JAXBException;
 
+import com.sandeveloper.code.DataBase.DataBaseOptions;
+import com.sandeveloper.code.DataBase.Database;
+import com.sandeveloper.code.io.IOXML;
+import com.sandeveloper.code.io.StudentFileIO;
+import com.sandeveloper.code.io.TXTFileIO;
+import com.sandeveloper.code.io.XMLRoot;
 import com.sandeveloper.code.student.Student;
-import com.sandeveloper.io.IOXML;
-import com.sandeveloper.io.StudentFileIO;
-import com.sandeveloper.io.TXTFileIO;
-import com.sandeveloper.io.XMLRoot;
 
 public class Main {
 	
-	
-	public final static void main(String[] args)throws IOException, ClassNotFoundException, JAXBException{
+	public final static void main(String[] args)throws IOException, ClassNotFoundException, JAXBException, SQLException{
 		
 		ArrayList<Student> studentsList = new ArrayList<Student>();
 		
 		Student Mary = new Student();
-		Mary.setAvGrade(3.55);
-		Mary.setCourseNumber(1);
+		Mary.setAvGrade(5);
+		Mary.setCourseId(1);
 		Mary.setFirstName("Mary");
 		Mary.setLastName("Pack");
 		
 		Student Jack = new Student();
 		Jack.setAvGrade(3.75);
-		Jack.setCourseNumber(1);
+		Jack.setCourseId(1);
 		Jack.setFirstName("Jack");
 		Jack.setLastName("Sparrow");
 		
 		Student Nikky = new Student();
 		Nikky.setAvGrade(4.0);
-		Nikky.setCourseNumber(2);
+		Nikky.setCourseId(2);
 		Nikky.setFirstName("Nikky");
 		Nikky.setLastName("Sanders");
 		
 		Student Naomi = new Student();
 		Naomi.setAvGrade(4.22);
-		Naomi.setCourseNumber(2);
+		Naomi.setCourseId(2);
 		Naomi.setFirstName("Naomi");
 		Naomi.setLastName("Harrison");
 		
 		Student Peter = new Student();
 		Peter.setAvGrade(4.75);
-		Peter.setCourseNumber(3);
+		Peter.setCourseId(3);
 		Peter.setFirstName("Peter");
 		Peter.setLastName("Ras");
 		
@@ -54,51 +56,47 @@ public class Main {
 		studentsList.add(Nikky);
 		studentsList.add(Naomi);
 		studentsList.add(Peter);
-		//
-		StudentFileIO io = new StudentFileIO();
-		Student std = new Student();
 		
-		ArrayList<Student> studentsList1 = new ArrayList<Student>();
-		XMLRoot sl = new XMLRoot();
-		sl.setStudentList(studentsList);
+		/*IOXML xml = new IOXML();
+		XMLRoot root = new XMLRoot();
+		root.setStudentList(studentsList);
+		xml.writeXmlFile("testNewFiedls", root);*/
 		
-		/*Begin. Check String 
 		
-		String mary = Mary.toString();
+		/*try {
+			Database.createTables();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 		
-		System.out.println(mary);
 		
-		//End. Check string*/
+		ArrayList<Student> students = new ArrayList<Student>();
+		DataBaseOptions dbO = new DataBaseOptions();
+		/*dbO.addNewRecord(Mary);
+		dbO.addNewStudent(Naomi);
+		dbO.addNewStudent(Nikky);
+		dbO.addNewStudent(Peter);
+		dbO.addNewStudent(Jack);*/
 		
-		TXTFileIO txtio = new TXTFileIO();
-		//txtio.setStudentList(studentsList);
-		//txtio.writeTextFile("txtfileNew.txt");
-		studentsList1 = txtio.readTextFile("txtfileNew.txt");
+		/*students = dbO.getAllStudents();
+		dbO.addNewDepartment("Math");
+		dbO.addNewDepartment("Computer Science");
+		dbO.addNewDepartment("Phys");*/
 		
-		for (Student student : studentsList1) {
+		//dbO.updateStudentsGPA("Mary", "Pack", 1, 3.75);
+		//dbO.deleteStudent("Mary", "Pack", 1);
+		//dbO.addNewDepartment("Phys");
+		
+		//dbO.updateStudentCourse("Peter", "Ras", 4);
+		
+		students = dbO.getStudentFullInformation();
+		
+		for (Student student : students) {
 			System.out.println(student.toString());
 		}
 		
-		/*String[] stringArray = new String[10];
-		String line = studentsList1.get(1).toString();
-		System.out.println("~~~~~~");
-		System.out.println(line);
 		
-		stringArray = line.split(" ");
-		
-		for (int i = 1; i < stringArray.length; i= i+2) {
-			System.out.println(stringArray[i]);
-			
-		}
-		
-		Student studentTxt = new Student();
-		studentTxt.setFirstName(stringArray[1]);
-		studentTxt.setLastName(stringArray[3]);
-		studentTxt.setCourseNumber(Integer.parseInt(stringArray[5]));
-		studentTxt.setAvGrade(Double.parseDouble(stringArray[7]));
-		
-		System.out.println("~~~~~~");
-		System.out.println(studentTxt.toString());*/
 	}
 	
 	

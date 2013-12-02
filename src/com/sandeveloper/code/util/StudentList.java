@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import com.sandeveloper.code.io.StudentFileIO;
 import com.sandeveloper.code.student.Student;
-import com.sandeveloper.io.StudentFileIO;
 
 public class StudentList {
 	
@@ -30,7 +30,7 @@ public class StudentList {
 	public ArrayList<Student> findStudentsByCourse(int course){
 		ArrayList<Student> filteredStudentList = new ArrayList<Student>();
 		for(Student s : studentFile){
-			if(s.getCourseNumber() == course){
+			if(s.getCourseId() == course){
 				filteredStudentList.add(s); 
 				System.out.println(s.getFirstName());
 			}
@@ -41,16 +41,22 @@ public class StudentList {
 	public void increaseCourse(){
 		int course = 0;
 		for(Student s : studentFile){
-			course = s.getCourseNumber();
-			s.setCourseNumber(course++);
+			course = s.getCourseId();
+			s.setCourseId(course++);
 		}
 	}
 	
-	public void showAll(){
+	public String showAll(){
+		
+		String s1 = null;
 		for (Student s : studentFile) {
+			s1 = s.toString();
 			System.out.println(s.toString());
 		}
+		return s1;
 	}
+	
+	
   }
 	
 
