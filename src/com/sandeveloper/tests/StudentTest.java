@@ -4,12 +4,18 @@ import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.xml.bind.JAXBException;
+
 import org.junit.Test;
 
+import com.sandeveloper.code.io.IOXML;
+import com.sandeveloper.code.io.StudentFileIO;
 import com.sandeveloper.code.io.TXTFileIO;
+import com.sandeveloper.code.io.XMLRoot;
 import com.sandeveloper.code.student.Student;
 import com.sandeveloper.code.util.SortByFirstName;
 import com.sandeveloper.code.util.SortByGrade;
@@ -23,25 +29,25 @@ public class StudentTest {
 		
 		Student Mary = new Student();
 		Mary.setAvGrade(3.55);
-		//Mary.setCourseNumber(1);
+		Mary.setCourseId(1);
 		Mary.setFirstName("Mary");
 		Mary.setLastName("Pack");
 		
 		Student Jack = new Student();
 		Jack.setAvGrade(3.75);
-		//Jack.setCourseNumber(1);
+		Jack.setCourseId(1);
 		Jack.setFirstName("Jack");
 		Jack.setLastName("Sparrow");
 		
 		Student Nikky = new Student();
 		Nikky.setAvGrade(4.0);
-		//Nikky.setCourseNumber(2);
+		Nikky.setCourseId(2);
 		Nikky.setFirstName("Nikky");
 		Nikky.setLastName("Sanders");
 		
 		Student Naomi = new Student();
 		Naomi.setAvGrade(4.22);
-		//Naomi.setCourseNumber(2);
+		Naomi.setCourseId(2);
 		Naomi.setFirstName("Naomi");
 		Naomi.setLastName("Harrison");
 		
@@ -63,19 +69,19 @@ public class StudentTest {
 		
 		Student Jack = new Student();
 		Jack.setAvGrade(3.75);
-		//Jack.setCourseNumber(1);
+		Jack.setCourseId(1);
 		Jack.setFirstName("Jack");
 		Jack.setLastName("Sparrow");
 		
 		Student Nikky = new Student();
 		Nikky.setAvGrade(4.0);
-		//Nikky.setCourseNumber(2);
+		Nikky.setCourseId(2);
 		Nikky.setFirstName("Nikky");
 		Nikky.setLastName("Sanders");
 		
 		Student Naomi = new Student();
 		Naomi.setAvGrade(4.22);
-		//Naomi.setCourseNumber(2);
+		Naomi.setCourseId(2);
 		Naomi.setFirstName("Naomi");
 		Naomi.setLastName("Harrison");
 		
@@ -90,9 +96,13 @@ public class StudentTest {
 		current.add(Naomi);
 		current.add(Jack);
  		
-		Collections.sort(current, new SortByGrade());
+		//Collections.sort(current, new SortByGrade());
 		
-		assertEquals(expected, current);
+		StudentList studList = new StudentList();
+		studList.setStudentFile(current);
+		ArrayList<Student> actual = new  ArrayList<Student>();
+		actual = studList.sortByGrade();
+		assertEquals(expected, actual);
 	}
 	
 	@Test
@@ -100,19 +110,19 @@ public class StudentTest {
 		
 		Student Jack = new Student();
 		Jack.setAvGrade(3.75);
-		//Jack.setCourseNumber(1);
+		Jack.setCourseId(1);
 		Jack.setFirstName("Jack");
 		Jack.setLastName("Sparrow");
 		
 		Student Nikky = new Student();
 		Nikky.setAvGrade(4.0);
-		//Nikky.setCourseNumber(2);
+		Nikky.setCourseId(2);
 		Nikky.setFirstName("Nikky");
 		Nikky.setLastName("Sanders");
 		
 		Student Naomi = new Student();
 		Naomi.setAvGrade(4.22);
-		//Naomi.setCourseNumber(2);
+		Naomi.setCourseId(2);
 		Naomi.setFirstName("Naomi");
 		Naomi.setLastName("Harrison");
 		
@@ -127,9 +137,14 @@ public class StudentTest {
 		current.add(Jack);
 		current.add(Naomi);
 		
-		Collections.sort(current, new SortByFirstName());
+		//Collections.sort(current, new SortByFirstName());
 		
-		assertEquals(expected, current);
+		ArrayList<Student> actual = new ArrayList<Student>();
+		StudentList studList = new StudentList();
+		studList.setStudentFile(current);
+		actual = studList.sortByFirtstName();
+		
+		assertEquals(expected, actual);
 	}
 	
 	@org.junit.Test
@@ -139,7 +154,7 @@ public class StudentTest {
 		
 		Student Mary = new Student();
 		Mary.setAvGrade(3.55);
-		//Mary.setCourseNumber(1);
+		Mary.setCourseId(1);
 		Mary.setFirstName("Mary");
 		Mary.setLastName("Pack");
 		
@@ -155,13 +170,13 @@ public class StudentTest {
 		
 		Student Mary = new Student();
 		Mary.setAvGrade(3.55);
-		//Mary.setCourseNumber(1);
+		Mary.setCourseId(1);
 		Mary.setFirstName("Mary");
 		Mary.setLastName("Pack");
 		
 		Student Jack = new Student();
 		Jack.setAvGrade(3.75);
-		//Jack.setCourseNumber(1);
+		Jack.setCourseId(1);
 		Jack.setFirstName("Jack");
 		Jack.setLastName("Sparrow");
 
@@ -196,7 +211,7 @@ public class StudentTest {
 		
 		Student Mary = new Student();
 		Mary.setAvGrade(3.55);
-		//Mary.setCourseNumber(1);
+		Mary.setCourseId(1);
 		Mary.setFirstName("Mary");
 		Mary.setLastName("Pack");
 		
@@ -205,10 +220,85 @@ public class StudentTest {
 		
 		current.add(Mary);
 		
-		//Mary.setCourseNumber(2);
+		Mary.setCourseId(2);
 		
 		expected.add(Mary);
 		
 		assertEquals(expected, current);
 	}
+	
+	@Test
+	public void testWiriteReadXML() throws JAXBException, FileNotFoundException{
+		
+		Student Jack = new Student();
+		Jack.setAvGrade(3.75);
+		Jack.setCourseId(1);
+		Jack.setFirstName("Jack");
+		Jack.setLastName("Sparrow");
+		
+		Student Nikky = new Student();
+		Nikky.setAvGrade(4.0);
+		Nikky.setCourseId(2);
+		Nikky.setFirstName("Nikky");
+		Nikky.setLastName("Sanders");
+		
+		ArrayList<Student> expected = new ArrayList<Student>();
+		
+		expected.add(Jack);
+		expected.add(Nikky);
+		
+		ArrayList<Student> current = new ArrayList<Student>();
+		
+		current.add(Jack);
+		current.add(Nikky);
+		
+		XMLRoot xmlroot = new XMLRoot();
+		xmlroot.setStudentList(current);
+		IOXML io = new IOXML();
+		io.writeXmlFile("testXML.xml", xmlroot);
+		
+		ArrayList<Student> actual = new ArrayList<Student>();
+		
+		actual = io.readXmlFile("testXML.xml");
+		
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testSerialization() throws ClassNotFoundException, IOException{
+		
+		Student Jack = new Student();
+		Jack.setAvGrade(3.75);
+		Jack.setCourseId(1);
+		Jack.setFirstName("Jack");
+		Jack.setLastName("Sparrow");
+		
+		Student Nikky = new Student();
+		Nikky.setAvGrade(4.0);
+		Nikky.setCourseId(2);
+		Nikky.setFirstName("Nikky");
+		Nikky.setLastName("Sanders");
+		
+		ArrayList<Student> expected = new ArrayList<Student>();
+		
+		expected.add(Jack);
+		expected.add(Nikky);
+		
+		ArrayList<Student> current = new ArrayList<Student>();
+		
+		current.add(Jack);
+		current.add(Nikky);
+		
+		StudentFileIO io = new StudentFileIO();
+		
+		io.setFileStudents(current);
+		io.writeToFile("testSer");
+
+		ArrayList<Student> actual = new ArrayList<Student>();
+		
+		actual = io.readFile("testSer");
+		
+		assertEquals(expected, actual);
+	} 
+	
 }

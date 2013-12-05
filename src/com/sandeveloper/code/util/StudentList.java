@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 
 import com.sandeveloper.code.io.StudentFileIO;
@@ -56,7 +57,19 @@ public class StudentList {
 		return s1;
 	}
 	
+	public ArrayList<Student> sortByGrade(){
+		
+		Collections.sort(studentFile, new SortByGrade());
+		
+		return studentFile;
+	}
 	
+	public ArrayList<Student> sortByFirtstName(){
+		
+		Collections.sort(studentFile, new SortByFirstName());
+		
+		return studentFile;
+	}
   }
 	
 

@@ -136,4 +136,21 @@ public class DataBaseOptions {
 		
 		return returnStudentList;
 	}
+	
+	public void searchByDepartment(String department) throws SQLException{
+		
+		String selectDepartment = "SELECT firstName, lastName, gpa FROM students WHERE students.course_id=(SELECT " +
+				"department.id FROM department where department = " + "'" + department + "'" + ")";
+		
+		ResultSet rs = statement.executeQuery(selectDepartment);
+		
+		while(rs.next()){
+			
+			String firstName = rs.getString("firstName");
+			String lastName = rs.getString("lastName");
+			Double gpa = Double.valueOf(rs.getString("gpa"));
+			
+			System.out.println(firstName + " " + lastName + " " + gpa); 
+		}
+	}
 }

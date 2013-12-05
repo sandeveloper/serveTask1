@@ -1,6 +1,8 @@
 package com.sandeveloper.code.main;
 
-public class Department {
+import java.io.Serializable;
+
+public class Department implements Serializable{
 	
 	private int departmentId;
 	private String department;

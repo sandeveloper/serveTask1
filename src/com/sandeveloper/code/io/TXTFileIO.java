@@ -57,10 +57,11 @@ public class TXTFileIO {
 			stringArray = line.split(" ");
 			
 			Student studentTxt = new Student();
-			studentTxt.setFirstName(stringArray[1]);
-			studentTxt.setLastName(stringArray[3]);
-			studentTxt.setCourseId(Integer.parseInt(stringArray[5]));
-			studentTxt.setAvGrade(Double.parseDouble(stringArray[7]));
+			studentTxt.setId(Integer.valueOf(stringArray[1]));
+			studentTxt.setFirstName(stringArray[3]);
+			studentTxt.setLastName(stringArray[5]);
+			studentTxt.setCourseId(Integer.parseInt(stringArray[7]));
+			studentTxt.setAvGrade(Double.parseDouble(stringArray[9]));
 			returnStudentList.add(studentTxt);
 		}
 		

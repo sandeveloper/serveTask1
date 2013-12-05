@@ -90,12 +90,13 @@ public class Main {
 		
 		//dbO.updateStudentCourse("Peter", "Ras", 4);
 		
-		students = dbO.getStudentFullInformation();
+		//students = dbO.getStudentFullInformation();
 		
 		for (Student student : students) {
-			System.out.println(student.toString());
+		//	System.out.println(student.toString());
 		}
 		
+		dbO.searchByDepartment("Computer Science");
 		
 	}
 	
